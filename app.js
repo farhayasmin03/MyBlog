@@ -14,6 +14,16 @@ var routes = require('./routes/router');
 app.use('/', routes);
 app.use(express.static(__dirname + '/public'));
 
+var mongoose=require('mongoose');
+mongoose.connect('mongodb://localhost/blogdb')
+var db= mongoose.connection
+
+//handling error
+db.on('error',console.error.bind(console,'connection error'));
+db.once('open',function(){
+    console.log('we are connected')
+});
+
 app.listen(3000, function () {
     console.log('Example app listening on port 3000!')
 });
