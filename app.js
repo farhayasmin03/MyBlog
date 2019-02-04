@@ -9,7 +9,7 @@
     }));
 
     app.use(bodyparser.json());
-    var routes = require('./routes/router');
+    var routes = require('./routes/router')(app,passport);
     var session = require('express-session')
     var passport = require('passport');
     const LocalStrategy = require('passport-local').Strategy;

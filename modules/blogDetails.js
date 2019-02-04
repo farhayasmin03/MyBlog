@@ -1,4 +1,5 @@
 var mongoose = require('mongoose');
+const passport = require('passport');
 var blogSchema = new mongoose.Schema({
     email: {
         type: String,
