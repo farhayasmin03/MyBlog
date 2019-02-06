@@ -37,6 +37,7 @@
     db.once('open', function () {
         console.log('we are connected')
     });
+    
 
     app.listen(3000, function () {
         console.log('Example app listening on port 3000!')

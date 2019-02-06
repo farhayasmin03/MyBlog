@@ -1,14 +1,17 @@
     var express = require('express');
 
     var Blogs = require('../modules/blogDetails');
-    
+    var Blogs1 = require('../modules/blogDetails1');
+    const passport = require('passport');
     var LocalStrategy = require('passport-local').Strategy;
+    
     var OAuthStrategy = require('passport-oauth').OAuthStrategy;
 
 
-    module.exports = function ( passport) {
-         var router = express.Router();
-        //const passport = require('passport'); 
+    module.exports = function (app,passport) {
+        var router = express.Router();
+        
+
         router.get('/', function (req, res) {
             res.render('index');
         });
@@ -42,20 +45,25 @@
             });
 
         });
+        router.post('/new_post',function(req,res){
+            let text = req.body.text;
+            if (!text) {
+                return res.send("Text is empty");
+            }
+            
         
-        router.post('/login',
-            passport.authenticate('local', {
-                successRedirect: '/',
-                failureRedirect: '/login',
-               
-            })
-        );
-        passport.deserializeUser(function (id, done) {
-            Blogs.findById(id, function (err, user) {
-                done(err, user);
+            let blog = new Blogs1({
+                text: text,
+                
             });
-        });
-        passport.use(new LocalStrategy(
+        
+            blog.save((err, savedInstance) => {
+                res.json(savedInstance);
+                console.log(savedInstance)
+            });
+        
+        })
+         /* passport.use(new LocalStrategy(
             function (username, password, done) {
                 Blogs.findOne({
                     username: username
@@ -78,10 +86,30 @@
 
             }
 
-        ));
-        // res.redirect("/typingpage");
+        )); */
+ 
+        
+            /* router.post('/login',
+                passport.authenticate('local',
+                {successRedirect: '/new_post',failureRedirect: '/',failureFlash: true}),
+                function (req, res) {
+                   console.log('authentication');
+                    
+                });
+                passport.serializeUser(function(user, done) {
+                    done(null, user.id);
+                  });
+                  
 
+            passport.deserializeUser(function (id, done) {
+                Blogs.findById(id, function (err, user) {
+                    done(err, user);
+                });
+            }); */
+             
+            //console.log("loggedin!!!!")
 
+        
 
 
         // GET route after registering
@@ -104,54 +132,4 @@
         return router;
     }
 
-    /* router.post('/login', function (req, res){
-            passport.authenticate('local', {
-                successRedirect: '/new_post',
-                failureRedirect: '/',
-                failureFlash: true
     
-            })
-    
-        });
-    
-          passport.serializeUser(function (user, done) {
-            done(null, user.id);
-        }); 
-     
-        passport.deserializeUser(function (id, done) {
-            Blogs.findById(id, function (err, user) {
-                done(err, user);
-            });
-        });
-        passport.use(new LocalStrategy(
-        function (username, password, done) {
-            Blogs.findOne({
-                username: username
-            }, function (err, user) {
-                if (err) {
-                    return done(err);
-                }
-                if (!user) {
-                    return done(null, false, {
-                        message: 'Incorrect username.'
-                    });
-                }
-                if (!user.validPassword(password)) {
-                    return done(null, false, {
-                        message: 'Incorrect password.'
-                    });
-                }
-                return done(null, user);
-            });
-        }
-        ));
-        return router;
-    
-    
-
-    } */
-
-
-
-
-    //module.exports = router;

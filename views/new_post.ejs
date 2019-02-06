@@ -1,5 +1,11 @@
 <!doctype html>
 <html lang="en">
+    <style type="text/css">
+    #text{
+        height:400px;
+        width:800px;
+    }
+    </style>
 
 <head>
     <!-- Required meta tags -->
@@ -19,13 +25,44 @@
             <header>
                 <h1>New post page</h1>
             </header>
-            <button>Add post</button>
+            <textarea name="text" id="text" placeholder="write something..."></textarea>
+            <button onClick="add()" id="addPost">Add post</button>
             <div>
 
             </div>
     </form>
 
     </div>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+
+            $("#addPost").on('click', add)
+
+            function add(e) {
+                e.preventDefult();
+                var data = {
+                    text: $("#text").val()
+                };
+                $.ajax({
+                    type: "post",
+                    url: 'http://localhost:3000/new_post',
+                    data: data,
+                    dataType: 'application/json',
+                    complete: function (data) {
+                        const body = JSON.parse(data.responseText);
+                        /* $('#text').html().val = body.text;
+                        console.log(body); */
+                        alert("hiii");
+                    }
+                });
+
+            }
+
+
+        });
+    </script>
 
 
 
