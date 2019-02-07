@@ -1,11 +1,11 @@
 <!doctype html>
 <html lang="en">
-    <style type="text/css">
-    #text{
-        height:400px;
-        width:800px;
+<style type="text/css">
+    #text {
+        height: 400px;
+        width: 800px;
     }
-    </style>
+</style>
 
 <head>
     <!-- Required meta tags -->
@@ -20,13 +20,14 @@
 </head>
 
 <body>
+        
     <form method="POST" action='/new_post'>
         <div class="container">
             <header>
                 <h1>New post page</h1>
             </header>
             <textarea name="text" id="text" placeholder="write something..."></textarea>
-            <button onClick="add()" id="addPost">Add post</button>
+            <button id="addPost">Add post</button>
             <div>
 
             </div>
@@ -37,29 +38,29 @@
 
     <script>
         $(document).ready(function () {
-
-            $("#addPost").on('click', add)
-
-            function add(e) {
-                e.preventDefult();
+            
+            $("#addPost").on('click', run)
+            
+            function run(e) {
+                e.preventDefault();
                 var data = {
-                    text: $("#text").val()
-                };
+                    text: $("#text").val(),
+
+                }
                 $.ajax({
-                    type: "post",
-                    url: 'http://localhost:3000/new_post',
+                    type: 'POST',
+                    url: "http://localhost:3000/new_post",
                     data: data,
-                    dataType: 'application/json',
+                    dataType: "application/json",
                     complete: function (data) {
                         const body = JSON.parse(data.responseText);
-                        /* $('#text').html().val = body.text;
-                        console.log(body); */
-                        alert("hiii");
+                        $('#text').html().val = body.text;
+                        $('#text').val('');
+                        console.log(body);
                     }
-                });
+                })
 
             }
-
 
         });
     </script>

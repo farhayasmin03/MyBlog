@@ -59,7 +59,7 @@
         
             blog.save((err, savedInstance) => {
                 res.json(savedInstance);
-                console.log(savedInstance)
+                
             });
         
         })
