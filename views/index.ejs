@@ -8,6 +8,7 @@
     crossorigin="anonymous" />
   <link rel="stylesheet" href="css/app.css" />
   <title>Farhana Yasmin's Blog</title>
+
 </head>
 
 <body>
@@ -20,37 +21,20 @@
         <div class="post-card">
 
           <h2><a href="#">
-            <ul>
+              <div class="list-container">
+
                 <% blog.forEach( function( blog ){ %>
-                 <li><p><%= blog.text %></p></li> 
+                <div class="list-box">
+                  <P style="color:rgb(108, 106, 235)"><%= moment().format('Do MMMM, YYYY'); %></P>
+                  <P style="color:rgb(15, 14, 14)"><%= blog.text %></P>
+                </div>
                 <% }); %>
-  
-
-            </ul>
-
-              
-
-
-
+              </div>
             </a></h2>
-          <p>Sunday, 27 Jan 2019</p>
+          
         </div>
-        <div class="post-card">
-          <h2><a href="#">BFS - Breadth-First Search - easy</a></h2>
-          <p>Sunday, 27 Jan 2019</p>
-        </div>
-        <div class="post-card">
-          <h2><a href="#">BFS - Breadth-First Search - easy</a></h2>
-          <p>Sunday, 27 Jan 2019</p>
-        </div>
-        <div class="post-card">
-          <h2><a href="#">BFS - Breadth-First Search - easy</a></h2>
-          <p>Sunday, 27 Jan 2019</p>
-        </div>
-        <div class="post-card">
-          <h2><a href="#">BFS - Breadth-First Search - easy</a></h2>
-          <p>Sunday, 27 Jan 2019</p>
-        </div>
+        
+
 
       </div>
       <div class="col-4">

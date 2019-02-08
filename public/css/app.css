@@ -22,6 +22,7 @@ header h4{
     border-radius: 6px;
     border: 1px solid #ddd;
     margin-bottom: 1rem;
+    
 }
 
 .post-card .list-unstyled{
@@ -33,6 +34,7 @@ header h4{
     font-weight: 600;
     margin-bottom: .5rem;
     display: block;
+    color:blue;
 }
 
 .post-card h2{
@@ -45,4 +47,12 @@ header h4{
 
 .post-card p{
     margin: 0;
+}
+.list-box{
+    
+    margin:10px;
+    box-sizing: border-box;
+    border:2px solid rgb(134, 91, 91);
+    padding:40px;
+    
 }

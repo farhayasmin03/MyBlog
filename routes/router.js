@@ -1,5 +1,5 @@
     var express = require('express');
-
+    var moment = require('moment');
     var Blogs = require('../modules/blogDetails');
     var Blogs1 = require('../modules/blogDetails1');
     const passport = require('passport');
@@ -12,11 +12,14 @@
         var router = express.Router();
 
         router.get('/', function (req, res) {
-            Blogs1.find({}, function(err, blog){
+            Blogs1.find({}, function (err, blog) {
                 res.render("index", {
-                    blog: blog
-                }); 
+                    blog: blog,
+                    moment: moment
+                });
             });
+            
+            
         });
         router.get('/new_post', function (req, res) {
             res.render('new_post')
@@ -67,7 +70,7 @@
             });
 
         });
-       
+
 
 
 
