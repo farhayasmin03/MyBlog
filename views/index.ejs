@@ -18,7 +18,21 @@
     <div class="row">
       <div class="col-8">
         <div class="post-card">
-          <h2><a href="#">BFS - Breadth-First Search - easy</a></h2>
+
+          <h2><a href="#">
+            <ul>
+                <% blog.forEach( function( blog ){ %>
+                 <li><p><%= blog.text %></p></li> 
+                <% }); %>
+  
+
+            </ul>
+
+              
+
+
+
+            </a></h2>
           <p>Sunday, 27 Jan 2019</p>
         </div>
         <div class="post-card">
@@ -37,7 +51,7 @@
           <h2><a href="#">BFS - Breadth-First Search - easy</a></h2>
           <p>Sunday, 27 Jan 2019</p>
         </div>
-        
+
       </div>
       <div class="col-4">
         <div class="post-card">

@@ -4,16 +4,19 @@
     var Blogs1 = require('../modules/blogDetails1');
     const passport = require('passport');
     var LocalStrategy = require('passport-local').Strategy;
-    
+
     var OAuthStrategy = require('passport-oauth').OAuthStrategy;
 
 
-    module.exports = function (app,passport) {
+    module.exports = function (app, passport) {
         var router = express.Router();
-        
 
         router.get('/', function (req, res) {
-            res.render('index');
+            Blogs1.find({}, function(err, blog){
+                res.render("index", {
+                    blog: blog
+                }); 
+            });
         });
         router.get('/new_post', function (req, res) {
             res.render('new_post')
@@ -45,25 +48,31 @@
             });
 
         });
-        router.post('/new_post',function(req,res){
+        router.post('/new_post', function (req, res) {
             let text = req.body.text;
             if (!text) {
                 return res.send("Text is empty");
             }
-            
-        
+
+
             let blog = new Blogs1({
                 text: text,
-                
+
             });
-        
+
             blog.save((err, savedInstance) => {
                 res.json(savedInstance);
-                
+
+
             });
-        
-        })
-         /* passport.use(new LocalStrategy(
+
+        });
+       
+
+
+
+
+        /* passport.use(new LocalStrategy(
             function (username, password, done) {
                 Blogs.findOne({
                     username: username
@@ -87,29 +96,29 @@
             }
 
         )); */
- 
-        
-            /* router.post('/login',
-                passport.authenticate('local',
-                {successRedirect: '/new_post',failureRedirect: '/',failureFlash: true}),
-                function (req, res) {
-                   console.log('authentication');
-                    
-                });
-                passport.serializeUser(function(user, done) {
-                    done(null, user.id);
-                  });
-                  
 
-            passport.deserializeUser(function (id, done) {
-                Blogs.findById(id, function (err, user) {
-                    done(err, user);
-                });
-            }); */
-             
-            //console.log("loggedin!!!!")
 
-        
+        /* router.post('/login',
+            passport.authenticate('local',
+            {successRedirect: '/new_post',failureRedirect: '/',failureFlash: true}),
+            function (req, res) {
+               console.log('authentication');
+                
+            });
+            passport.serializeUser(function(user, done) {
+                done(null, user.id);
+              });
+              
+
+        passport.deserializeUser(function (id, done) {
+            Blogs.findById(id, function (err, user) {
+                done(err, user);
+            });
+        }); */
+
+        //console.log("loggedin!!!!")
+
+
 
 
         // GET route after registering
@@ -131,5 +140,3 @@
         });
         return router;
     }
-
-    
